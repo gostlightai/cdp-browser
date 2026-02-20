@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 <tabId> <px|sel> [down|up]" >&2
+  exit 1
+fi
+tabId="$1"
+target="$2"
+dir="${3:-down}"
+node "$(dirname "$0")/../pw.js" scroll "$tabId" "$target" "$dir"

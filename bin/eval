@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 <tabId> \"js code\"" >&2
+  exit 1
+fi
+tabId="$1"
+shift
+js_code="$*"
+node "$(dirname "$0")/../pw.js" eval "$tabId" "$js_code"
