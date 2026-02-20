@@ -7,5 +7,9 @@
     "playwright": "^1.48.0"
   },
   "keywords": ["openclaw", "skill", "cdp", "browser", "chromium"],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gostlightai/cdp-browser"
+  }
 }

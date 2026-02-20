@@ -33,3 +33,5 @@ Run from the skill dir (`bin/` scripts):
 ## Security
 
 See [SECURITY.md](SECURITY.md) for mitigations and operational notes.
+
+**Source:** https://github.com/gostlightai/cdp-browser
