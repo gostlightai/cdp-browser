@@ -1,6 +1,25 @@
 // cdp.js - CDP wrapper using fetch (no shell)
 const CDP_URL = 'http://localhost:9222/json';
 
+function validateHttpUrl(input) {
+  if (!input || typeof input !== 'string') throw new Error('Missing url');
+  const trimmed = input.trim();
+  if (!trimmed) throw new Error('Missing url');
+
+  let parsed;
+  try {
+    parsed = new URL(trimmed);
+  } catch {
+    throw new Error(`Invalid URL: ${input}`);
+  }
+
+  if (!['http:', 'https:'].includes(parsed.protocol)) {
+    throw new Error(`Blocked URL scheme: ${parsed.protocol} (only http/https allowed)`);
+  }
+
+  return parsed.toString();
+}
+
 async function status() {
   const resp = await fetch(CDP_URL);
   if (!resp.ok) throw new Error(`CDP error: ${resp.status}`);
@@ -14,7 +33,8 @@ async function listTabs() {
 }
 
 async function newTab(url) {
-  const payload = JSON.stringify({ url: String(url) });
+  const safeUrl = validateHttpUrl(url);
+  const payload = JSON.stringify({ url: safeUrl });
   const resp = await fetch(`${CDP_URL}/new`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -26,7 +46,8 @@ async function newTab(url) {
 
 async function gotoTab(tabId, url) {
   const safeId = String(tabId).replace(/[^A-Za-z0-9_-]/g, '');
-  const payload = JSON.stringify({ url: String(url) });
+  const safeUrl = validateHttpUrl(url);
+  const payload = JSON.stringify({ url: safeUrl });
   const resp = await fetch(`${CDP_URL}/runtime/activate/${safeId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

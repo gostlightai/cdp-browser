@@ -2,6 +2,25 @@ const playwright = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
+function validateHttpUrl(input) {
+  if (!input || typeof input !== 'string') throw new Error('Missing url');
+  const trimmed = input.trim();
+  if (!trimmed) throw new Error('Missing url');
+
+  let parsed;
+  try {
+    parsed = new URL(trimmed);
+  } catch {
+    throw new Error(`Invalid URL: ${input}`);
+  }
+
+  if (!['http:', 'https:'].includes(parsed.protocol)) {
+    throw new Error(`Blocked URL scheme: ${parsed.protocol} (only http/https allowed)`);
+  }
+
+  return parsed.toString();
+}
+
 (async () => {
   let args = process.argv.slice(2);
   const action = args[0];
@@ -43,12 +62,12 @@ const path = require('path');
         await page.screenshot({ path: pngPath, fullPage: true });
         console.log(`Snapshot saved: ${pngPath}`);
         break;
-      case 'goto':
-        const url = args[2];
-        if (!url) throw new Error('Missing url');
-        await page.goto(url, { waitUntil: 'networkidle' });
-        console.log(`Navigated to ${url}`);
+      case 'goto': {
+        const safeUrl = validateHttpUrl(args[2]);
+        await page.goto(safeUrl, { waitUntil: 'networkidle' });
+        console.log(`Navigated to ${safeUrl}`);
         break;
+      }
       case 'close-popup':
         await page.evaluate(() => {
           Array.from(document.querySelectorAll('[role="dialog"], .modal, .popup, [role="dialogue"]')).forEach(el => {

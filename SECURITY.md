@@ -9,6 +9,7 @@
 | cdp.js execSync + curl | Shell injection | Replaced with Node `fetch()` | No shell invocation; eliminates injection vector |
 | pw.js eval | Arbitrary JS execution; data exfiltration | Removed; added allowlisted `query` (getText, getHtml, getUrl) | Only safe, predefined ops; no user code interpolation |
 | tweet (auto-post) | Unauthorized posting on X | Split into tweet-draft (default) + tweet-post (requires `--confirm` as second arg) | User must explicitly approve before posting |
+| pw.js goto / cdp.js newTab,gotoTab | Browser-context RCE via javascript:, data:, file: URLs | Strict URL validation: http/https only | Blocks arbitrary code execution in browser context |
 
 ## Implemented Protections
 
@@ -20,6 +21,7 @@
 | **Snapshot path traversal** | `tabId` sanitized to `[A-Za-z0-9_-]`; output path uses `path.join(__dirname, ...)` |
 | **cdp.js gotoTab** | `tabId` sanitized before use in URL path |
 | **Unauthorized tweet** | tweet-post requires `--confirm` as second arg; tweet-draft fills compose only |
+| **Unsafe URL schemes** | validateHttpUrl in pw.js (goto), cdp.js (newTab, gotoTab); rejects javascript:, data:, file:, etc. |
 
 ## Operational Notes
 
