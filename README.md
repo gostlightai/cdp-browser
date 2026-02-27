@@ -27,6 +27,11 @@ cp ~/.openclaw/workspace/skills/cdp-browser/.cdp-browser.json.example ~/.opencla
 
 Without it, tweet-draft works but the agent sends plain text only; user confirms via "go ahead" in chat.
 
+## Tweet flow
+
+- **tweet-draft** — fills compose only (safe default)
+- **tweet-post** — requires `--confirm` as second arg; posts only when user approves
+
 ## Security
 
 See [SECURITY.md](SECURITY.md) for security considerations and mitigations.
