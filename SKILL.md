@@ -7,6 +7,8 @@ description: CDP browser control at localhost:9222. Use when you need to inspect
 
 CLI for Chrome/Chromium at localhost:9222. Inspect tabs, take screenshots, navigate, scroll, post to X, or run JS in a persistent browser session.
 
+**Repo:** https://github.com/gostlightai/cdp-browser
+
 **Prerequisites:** Chromium running with `--remote-debugging-port=9222`. Docker Compose or a local Chrome with remote debugging enabled.
 
 ## Commands
@@ -76,5 +78,3 @@ When `tweet.confirmButton` is true (config present) and you are in a Telegram se
 ## Security
 
 See [SECURITY.md](SECURITY.md) for mitigations and operational notes.
-
-**Source:** https://github.com/gostlightai/cdp-browser

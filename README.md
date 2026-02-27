@@ -2,6 +2,8 @@
 
 CDP browser control skill for OpenClaw. CLI for Chrome/Chromium at localhost:9222.
 
+**Repo:** https://github.com/gostlightai/cdp-browser
+
 ## Install
 
 ```bash
