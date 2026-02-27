@@ -17,6 +17,16 @@ Chromium running with `--remote-debugging-port=9222` (Docker Compose or local Ch
 
 See [SKILL.md](SKILL.md) for commands and usage. Run `bin/` scripts from the skill dir.
 
+## Config (Telegram confirm button)
+
+To enable the "Confirm Post" inline button in Telegram, copy the example config:
+
+```bash
+cp ~/.openclaw/workspace/skills/cdp-browser/.cdp-browser.json.example ~/.openclaw/workspace/.cdp-browser.json
+```
+
+Without it, tweet-draft works but the agent sends plain text only; user confirms via "go ahead" in chat.
+
 ## Security
 
 See [SECURITY.md](SECURITY.md) for security considerations and mitigations.

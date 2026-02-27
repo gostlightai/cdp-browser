@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+if [ $# -lt 3 ]; then
+  echo "Usage: $0 <tabId> --confirm \"text\"" >&2
+  exit 1
+fi
+tabId="$1"
+shift
+if [ "${1:-}" != "--confirm" ]; then
+  echo "Error: --confirm required" >&2
+  echo "Usage: $0 <tabId> --confirm \"text\"" >&2
+  exit 1
+fi
+node "$(dirname "$0")/../pw.js" tweet-post "$tabId" "$@"

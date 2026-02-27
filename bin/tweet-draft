@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+# Usage: tweet-draft <tabId> [--save-pending] "text"
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 <tabId> [--save-pending] \"text\"" >&2
+  exit 1
+fi
+tabId="$1"
+shift
+node "$(dirname "$0")/../pw.js" tweet-draft "$tabId" "$@"

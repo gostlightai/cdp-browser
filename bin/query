@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+# Usage: query <tabId> getUrl | getText [selector] | getHtml [selector]
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 <tabId> getUrl | getText [selector] | getHtml [selector]" >&2
+  exit 1
+fi
+tabId="$1"
+op="$2"
+shift 2
+node "$(dirname "$0")/../pw.js" query "$tabId" "$op" "$@"

@@ -4,6 +4,4 @@ if [ $# -ne 1 ]; then
   echo "Usage: $0 <url>" >&2
   exit 1
 fi
-url="$1"
-payload=$(node -e "console.log(JSON.stringify({url: process.argv[1]}))" "$url")
-curl -s -X PUT -H "Content-Type: application/json" -d "$payload" http://localhost:9222/json/new
+node "$(dirname "$0")/../cdp.js" new "$1"

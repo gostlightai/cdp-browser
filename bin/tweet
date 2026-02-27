@@ -1,10 +1,11 @@
 #!/bin/bash
 set -euo pipefail
+# Default: tweet-draft (fills compose, does not post). Use tweet-post for posting.
 if [ $# -lt 2 ]; then
   echo "Usage: $0 <tabId> \"text\"" >&2
+  echo "  Fills compose only. Use tweet-post for posting." >&2
   exit 1
 fi
 tabId="$1"
 shift
-text="$*"
-node "$(dirname "$0")/../pw.js" tweet "$tabId" "$text"
+node "$(dirname "$0")/../pw.js" tweet-draft "$tabId" "$@"
