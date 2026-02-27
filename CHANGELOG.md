@@ -25,6 +25,8 @@
 - Added query ops: getUrl, getText [selector], getHtml [selector]
 - Added tweet-draft --save-pending (writes to .cdp-browser/pending-tweet.json)
 
+### Changes implemented and tested by Cedric, OpenClaw agent, on Codex 5.3. 
+
 ## 2.0.0 (2026-02-19)
 
 **security: CDP v2 hardening - explicit confirm, draft/post split, safer selectors**
